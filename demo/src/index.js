@@ -59,11 +59,54 @@ class Demo extends Component {
                         id: '2',
                         name: 'Last name',
                         typeId: 'singleLineText'
+                    }, {
+                        id: '3',
+                        name: 'Attachments',
+                        typeId: 'attachment'
                     }]}
                     getValue={({fieldId}) => {
                         const values = {
-                            '1': 'Luke',
-                            '2': 'Skywalker'
+                            '1': {
+                                text: 'Luke'
+                            },
+                            '2': {
+                                text: 'Skywalker'
+                            },
+                            '3': {
+                                attachments: [{
+                                    id: '1',
+                                    mimeType: 'video/ogg',
+                                    filename: 'Video',
+                                    thumbnails: null,
+                                    url: 'https://www.w3schools.com/html/mov_bbb.ogg'
+                                }, {
+                                    id: '2',
+                                    mimeType: 'audio/mpeg',
+                                    filename: 'Audio',
+                                    thumbnails: null,
+                                    url: 'https://dl.airtable.com/AILblIU3RJfJTtudwUE8_%E0%B8%97%E0%B8%B8%E0%B8%81%E0%B8%9B%E0%B8%A3%E0%B8%B0%E0%B9%80%E0%B8%A0%E0%B8%97'
+                                }, {
+                                    id: '3',
+                                    mimeType: 'image/jpeg',
+                                    filename: `Image`,
+                                    thumbnails: {
+                                        small: 'https://placekitten.com/200/300',
+                                        medium: 'https://placekitten.com/200/300',
+                                        large: 'https://placekitten.com/200/300',
+                                    },
+                                    url: 'https://placekitten.com/200/300'
+                                }, {
+                                    id: '4',
+                                    mimeType: 'image/gif',
+                                    filename: 'GIF',
+                                    thumbnails: {
+                                        small: 'https://media.giphy.com/media/1wqqlaQ7IX3TXibXZE/giphy.gif',
+                                        medium: 'https://media.giphy.com/media/1wqqlaQ7IX3TXibXZE/giphy.gif',
+                                        large: 'https://media.giphy.com/media/1wqqlaQ7IX3TXibXZE/giphy.gif',
+                                    },
+                                    url: 'https://media.giphy.com/media/1wqqlaQ7IX3TXibXZE/giphy.gif'
+                                }]
+                            }
                         }
                         return values[fieldId]
                     }}

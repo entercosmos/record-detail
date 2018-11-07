@@ -1,6 +1,6 @@
 {
   "name": "@cmds/record-detail",
-  "version": "0.1.0",
+  "version": "0.2.0",
   "description": "Used for displaying a record in detail.",
   "main": "lib/index.js",
   "module": "es/index.js",
@@ -21,6 +21,7 @@
     "test:watch": "nwb test-react --server"
   },
   "dependencies": {
+    "@cmds/attachment-field": "^0.1.0",
     "@cmds/single-line-text-field": "^1.0.0",
     "emotion": "^9.2.12"
   },

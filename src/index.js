@@ -1,9 +1,18 @@
 import React from 'react'
 import {css} from 'emotion'
 import SingleLineTextField from '@cmds/single-line-text-field'
+import AttachmentField from '@cmds/attachment-field'
 
 const fieldTypes = {
-    singleLineText: SingleLineTextField
+    singleLineText: SingleLineTextField,
+    attachment: AttachmentField
+}
+
+const connectors = {
+    singleLineText: ({text}) => ({
+        value: text
+    }),
+    attachment: value => value
 }
 
 export default class RecordDetail extends React.Component {
@@ -15,9 +24,14 @@ export default class RecordDetail extends React.Component {
                 {this.props.fields.map(field => {
 
                     const Field = fieldTypes[field.typeId]
+                    const connector = connectors[field.typeId]
                     const value = this.props.getValue({
                         fieldId: field.id
                     })
+
+                    const props = connector(value)
+
+                    console.log(props)
 
                     return (
                         <div
@@ -42,8 +56,8 @@ export default class RecordDetail extends React.Component {
                             <div>
                                 <Field
                                     id={field.id}
-                                    value={value}
                                     onChange={this.props.onChange}
+                                    {...props}
                                 />
                             </div>
                         </div>
