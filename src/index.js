@@ -1,14 +1,19 @@
 import React from 'react'
 import {css} from 'emotion'
+import CheckboxField from '@cmds/checkbox-field'
 import SingleLineTextField from '@cmds/single-line-text-field'
 import AttachmentField from '@cmds/attachment-field'
 
 const fieldTypes = {
+    checkbox: CheckboxField,
     singleLineText: SingleLineTextField,
     attachment: AttachmentField
 }
 
 const connectors = {
+    checkbox: ({checked}) => ({
+        value: checked
+    }),
     singleLineText: ({text}) => ({
         value: text
     }),
@@ -30,8 +35,6 @@ export default class RecordDetail extends React.Component {
                     })
 
                     const props = connector(value)
-
-                    console.log(props)
 
                     return (
                         <div
@@ -57,6 +60,8 @@ export default class RecordDetail extends React.Component {
                                 <Field
                                     id={field.id}
                                     onChange={this.props.onChange}
+                                    contextId={'recordDetail'}
+                                    roleId={this.props.roleId}
                                     {...props}
                                 />
                             </div>
