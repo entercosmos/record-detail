@@ -45,27 +45,39 @@ const Demo1 = ({roleId}) => (
     <RecordDetail
         roleId={roleId}
         fields={[{
-            id: '1',
+            id: 'fld1',
             name: 'Name',
-            typeId: 'singleLineText'
+            typeId: 'singleLineText',
+            options: {
+                defaultValue: null
+            }
         }, {
-            id: '2',
+            id: 'fld2',
             name: 'Published',
             typeId: 'checkbox'
         }, {
-            id: '3',
+            id: 'fld3',
             name: 'Attachments',
             typeId: 'attachment'
+        }, {
+            id: 'fld4',
+            name: 'Revenue',
+            typeId: 'number',
+            options: {
+                numberFormat: 'decimal',
+                allowNegativeNumbers: false,
+                precision: 2
+            }
         }]}
         getValue={({fieldId}) => {
             const values = {
-                '1': {
+                'fld1': {
                     text: 'Luke Skywalker'
                 },
-                '2': {
+                'fld2': {
                     checked: true
                 },
-                '3': {
+                'fld3': {
                     attachments: [{
                         id: '1',
                         mimeType: 'video/ogg',
@@ -99,6 +111,9 @@ const Demo1 = ({roleId}) => (
                         },
                         url: 'https://media.giphy.com/media/1wqqlaQ7IX3TXibXZE/giphy.gif'
                     }]
+                },
+                'fld4': {
+                    number: 32.25
                 }
             }
             return values[fieldId]

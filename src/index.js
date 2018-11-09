@@ -1,5 +1,6 @@
 import React from 'react'
 import {css} from 'emotion'
+import NumberField from '@cmds/number-field'
 import CheckboxField from '@cmds/checkbox-field'
 import SingleLineTextField from '@cmds/single-line-text-field'
 import AttachmentField from '@cmds/attachment-field'
@@ -7,6 +8,7 @@ import AttachmentField from '@cmds/attachment-field'
 const fieldTypes = {
     checkbox: CheckboxField,
     singleLineText: SingleLineTextField,
+    number: NumberField,
     attachment: AttachmentField
 }
 
@@ -17,7 +19,10 @@ const connectors = {
     singleLineText: ({text}) => ({
         value: text
     }),
-    attachment: value => value
+    attachment: value => value,
+    number: ({number}) => ({
+        value: number
+    })
 }
 
 export default class RecordDetail extends React.Component {
@@ -62,6 +67,7 @@ export default class RecordDetail extends React.Component {
                                     onChange={this.props.onChange}
                                     contextId={'recordDetail'}
                                     roleId={this.props.roleId}
+                                    // options={field.options}
                                     {...props}
                                 />
                             </div>
