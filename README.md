@@ -1,5 +1,7 @@
 # RecordDetail
 
+[![Greenkeeper badge](https://badges.greenkeeper.io/entercosmos/record-detail.svg)](https://greenkeeper.io/)
+
 [![npm package][npm-badge]][npm]
 
 Used for displaying a record in detail.	
