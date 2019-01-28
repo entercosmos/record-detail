@@ -10,66 +10,11 @@ Used for displaying a record in detail.
 |:---|:---|:---:|:---|
 | id | String | ✓ | Unique id for the instance of this record |
 | roleId | Role | ✓ | The behaviour changes based on the role. Valid options include `editor` or `readOnly` |
-| fields | Array | ✓ | List of Field objects. [Learn more](#field) |
-| visibleFieldOrder | Array | ✓ | A list of ids for the fields that need to be displayed and in which order |
+| data | Object | ✓ | Record data |
+| fieldCount | Number | ✓ | Number of fields in the detail |
+| fieldGetter | Function | ✓ | Return field data for a field at a given index `({index: int}): obj` |
+| cellGetter | Function | ✓ | Return cell data for a given field `({fieldData: int}): obj` |
 | fieldRenderer | Function | ✓ | Responsible for rendering a field given it's configuration: `({id: string, index: number, field: object}): jsx` [Learn more](#fieldRenderer) |
-
-#### fieldRenderer
-
-Responsible for rendering a field given it's configuration.
-
-```jsx harmony
-import SingleLineTextField from '@cmds/single-line-text-field'
-// import all other fields that need to be supported...
-
-const renderers = {
-    singleLineText: ({props}) => (
-        <SingleLineTextField
-            {...props}
-            text={'Luke Skywalker'}
-            onChange={({id, text}) => {
-                
-                // store new value
-            }}
-        />
-    ),
-    // and all other fields that need to be supported
-}
-
-function fieldRenderer({id, index, field, props}) {
-
-    const renderer = renderers[field.typeId]
-    
-    if (!renderer) {
-        throw new Error(`Renderer for typeId '${field.typeId}' not found`)
-    }
-    
-    /**
-     * Note — props already contains properties
-     * related to the context in which the field
-     * gets rendered.
-     * 
-     * {
-     *      id: 'fld1', // the field's id
-     *      contextId: 'recordDetail',
-     *      roleId: 'editor'
-     * }
-     */
-    
-    return renderer({ 
-        id, 
-        field,
-        props
-    })
-}
-```
-
-#### Field
-
-| Property | Type | Required? | Description |
-|:---|:---|:---:|:---|
-| id | String | ✓ | Unique id for the field |
-| name | String | ✓ | Name describing the field |
 
 ### More information
 

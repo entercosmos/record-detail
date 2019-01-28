@@ -1,4 +1,5 @@
 import React from 'react'
+import times from 'lodash/times'
 import PropTypes from 'prop-types'
 import {css} from 'emotion'
 
@@ -7,33 +8,28 @@ export default class RecordDetail extends React.Component {
     state = {
         id: PropTypes.string.isRequired,
         roleId: PropTypes.oneOf(['editor', 'readOnly']),
-        fields: PropTypes.arrayOf(
-            PropTypes.shape({
-                id: PropTypes.string.isRequired,
-                name: PropTypes.string.isRequired
-            })
-        ),
-        visibleFieldOrder: PropTypes.arrayOf(PropTypes.string.isRequired).isRequired,
+        data: PropTypes.obj,
+        fieldCount: PropTypes.number.isRequired,
+        fieldGetter: PropTypes.func.isRequired,
+        cellGetter: PropTypes.func.isRequired,
         fieldRenderer: PropTypes.func.isRequired
     }
 
     render() {
 
-        const {fieldRenderer, visibleFieldOrder} = this.props
-
-        const fieldsById = this.props.fields.reduce((result, field) => {
-            result[field.id] = field
-            return result
-        }, {})
-
-        const fields = visibleFieldOrder.map(id => fieldsById[id])
+        const {fieldCount, fieldRenderer, fieldGetter, cellGetter, roleId, data} = this.props
 
         return (
             <div>
-                {fields.map(field => (
-                    <div
-                        key={field.id}
-                        className={css`
+                {times(fieldCount).map(index => {
+
+                    const fieldData = fieldGetter({index})
+                    const cellData = cellGetter({fieldData, data})
+
+                    return (
+                        <div
+                            key={index}
+                            className={css`
                                 padding: 30px 15px;
                                 background-color: #fff;
                                 border-top: solid 1px #e5e5e5;
@@ -41,28 +37,30 @@ export default class RecordDetail extends React.Component {
                                     border-top: none;
                                 }
                             `}
-                    >
-                        <div
-                            className={css`
+                        >
+                            <div
+                                className={css`
                                     font-weight: bold;
                                     margin-bottom: 8px;
                                 `}
-                        >
-                            {field.name}
+                            >
+                                {fieldData.name}
+                            </div>
+                            <div>
+                                {fieldRenderer({
+                                    id: this.props.id,
+                                    fieldData,
+                                    cellData,
+                                    props: {
+                                        id: fieldData.id,
+                                        contextId: 'recordDetail',
+                                        roleId
+                                    }
+                                })}
+                            </div>
                         </div>
-                        <div>
-                            {fieldRenderer({
-                                id: this.props.id,
-                                field,
-                                props: {
-                                    id: field.id,
-                                    contextId: 'recordDetail',
-                                    roleId: this.props.roleId
-                                }
-                            })}
-                        </div>
-                    </div>
-                ))}
+                    )
+                })}
             </div>
         )
     }

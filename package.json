@@ -1,6 +1,6 @@
 {
   "name": "@cmds/record-detail",
-  "version": "0.5.0",
+  "version": "0.6.0",
   "description": "Used for displaying a record in detail.",
   "main": "lib/index.js",
   "module": "es/index.js",
@@ -11,7 +11,7 @@
     "umd"
   ],
   "scripts": {
-    "deploy": "cd demo/dist && surge",
+    "deploy": "cd demo/dist && surge --domain cmds-record-detail.surge.sh",
     "build": "nwb build-react-component",
     "clean": "nwb clean-module && nwb clean-demo",
     "prepublishOnly": "npm run build",
@@ -21,23 +21,29 @@
     "test:watch": "nwb test-react --server"
   },
   "dependencies": {
-    "emotion": "^9.2.12"
+    "emotion": "^10.0.6",
+    "lodash": "^4.17.11"
   },
   "peerDependencies": {
     "react": "16.x"
   },
   "devDependencies": {
-    "@cmds/attachment-field": "^0.8.0",
+    "@cmds/attachment-field": "^0.9.0",
     "@cmds/checkbox-field": "^0.3.0",
-    "@cmds/link-to-another-record-field": "^0.3.0",
-    "@cmds/long-text-field": "^0.3.1",
-    "@cmds/multiple-select-field": "^0.6.0",
-    "@cmds/number-field": "^0.7.0",
-    "@cmds/single-line-text-field": "^0.6.0",
-    "@cmds/single-select-field": "^0.5.0",
+    "@cmds/link-to-another-record-field": "^0.6.0",
+    "@cmds/long-text-field": "^0.4.0",
+    "@cmds/multiple-select-field": "^0.7.0",
+    "@cmds/number-field": "^0.8.1",
+    "@cmds/select": "^0.4.0",
+    "@cmds/single-line-text-field": "^0.6.2",
+    "@cmds/single-select-field": "^0.6.1",
+    "immutable": "^4.0.0-rc.12",
     "nwb": "0.23.x",
     "react": "^16.6.1",
-    "react-dom": "^16.6.1"
+    "react-dom": "^16.6.1",
+    "react-redux": "^6.0.0",
+    "redux": "^4.0.1",
+    "redux-logger": "^3.0.6"
   },
   "author": "",
   "homepage": "",
